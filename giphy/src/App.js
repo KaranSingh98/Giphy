@@ -16,8 +16,7 @@ class App extends Component {
 
     componentDidMount = () => {
 
-        axios.get(`http://api.giphy.com/v1/gifs/search?q=${this.state.search}&api_key=6dULuhQPzri1hsmIPPmaIjSkieuL6EYK`,
-        {headers: {'content-type': 'text/html'}})
+        axios.get(`http://api.giphy.com/v1/gifs/search?q=${this.state.search}&api_key=6dULuhQPzri1hsmIPPmaIjSkieuL6EYK`)
         .then(res => {
 
             this.setState({
@@ -29,11 +28,8 @@ class App extends Component {
 
     updateSearch = (newSearch) => {
 
-        const coolSearch = newSearch;
-
-        console.log('new search is', coolSearch);
         this.setState({
-            search: coolSearch
+            search: newSearch,
         });
 
         console.log('search in app is', this.state.search)
