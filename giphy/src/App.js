@@ -10,11 +10,11 @@ class App extends Component {
         super(props);
         this.state = {
             gifs: [],
-            search: 'trending'
+            search: ''
         };
     }
 
-    componentDidMount = () => {
+    getGifs = () => {
 
         axios.get(`http://api.giphy.com/v1/gifs/search?q=${this.state.search}&api_key=6dULuhQPzri1hsmIPPmaIjSkieuL6EYK`)
         .then(res => {
@@ -26,11 +26,17 @@ class App extends Component {
         .catch(err => console.log(err));
     }
 
+    componentDidMount = () => {this.getGifs()};
+
+
+    componentDidUpdate = () => {this.getGifs()};
+
+
     updateSearch = (newSearch) => {
 
         this.setState({
             search: newSearch,
-        });
+        }, () => console.log(this.state.search));
 
         console.log('search in app is', this.state.search)
     }
