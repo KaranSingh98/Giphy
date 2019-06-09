@@ -23,16 +23,20 @@ class App extends Component {
             this.setState({
                 gifs: res.data.data
             });
-            console.log('gifs is ', this.state.gifs);
         })
         .catch(err => console.log(err));
     }
 
     updateSearch = (newSearch) => {
 
+        const coolSearch = newSearch;
+
+        console.log('new search is', coolSearch);
         this.setState({
-            search: newSearch
+            search: coolSearch
         });
+
+        console.log('search in app is', this.state.search)
     }
 
     render() {
@@ -45,7 +49,7 @@ class App extends Component {
                 <h1> </h1>
                 {this.state.gifs.map(gif =>
                     <div className="gifs" key={gif.id}>
-                        <GifCard gif={gif.images.url} alt={gif.title}/>
+                        <GifCard gif={gif.images.original.url} alt={gif.title}/>
                     </div>
                 )}
             </div>
