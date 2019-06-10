@@ -10,7 +10,8 @@ class App extends Component {
         super(props);
         this.state = {
             gifs: [],
-            search: ''
+            search: 'trending',
+            filter: '',
         };
     }
 
@@ -29,25 +30,38 @@ class App extends Component {
     componentDidMount = () => {this.getGifs()};
 
 
-    componentDidUpdate = () => {this.getGifs()};
-
+    componentDidUpdate = (prevProps, prevState) => {
+        if(this.state.search !== prevState.search)
+            {this.getGifs()};
+    }
 
     updateSearch = (newSearch) => {
 
         this.setState({
             search: newSearch,
-        }, () => console.log(this.state.search));
+        });
+    }
 
-        console.log('search in app is', this.state.search)
+    updateFilter = (newFilter) => {
+
+        this.setState({
+            filter: newFilter,
+        });
+    }
+
+    display = () => {
+
+        console.log('filter is ', this.state.filter);
     }
 
     render() {
         return (
-            <div>
+            <div className="page">
                 <header>
                     <h1> GIPHY </h1>
                 </header>
-                <SearchField updateSearch={this.updateSearch} />
+                {this.display()}
+                <SearchField updateFilter={this.updateFilter} updateSearch={this.updateSearch} />
                 <h1> </h1>
                 {this.state.gifs.map(gif =>
                     <div className="gifs" key={gif.id}>
